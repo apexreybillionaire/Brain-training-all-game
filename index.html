@@ -1,95 +1,263 @@
 
+<!
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brain Training Game</title>
+<title>BrainSpace | Train Your Mind</title>
 <style>
+:root {
+  --bg: #080910;
+  --panel: #121421;
+  --purple: #9b7bff;
+  --text: #f5f3ff;
+  --muted: #a6a6bc;
+}
+* { box-sizing: border-box; }
 body {
-  background: #080b12;
-  color: white;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
   font-family: Arial, sans-serif;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 6%;
+  border-bottom: 1px solid #242438;
+}
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+}
+.logo span { color: var(--purple); }
+.tag {
+  color: #c4b5fd;
+  font-size: 12px;
+  border: 1px solid #42336a;
+  padding: 8px 12px;
+  border-radius: 30px;
+}
+main {
+  width: min(100% - 32px, 780px);
+  margin: auto;
+}
+.hero {
   text-align: center;
-  padding: 30px 15px;
+  padding: 55px 0 35px;
 }
-.card {
-  background: #151a27;
-  border: 1px solid #343b50;
-  border-radius: 20px;
-  padding: 25px 18px;
-  max-width: 380px;
-  margin: 40px auto;
+.eyebrow {
+  color: var(--purple);
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: bold;
 }
-h1 { color: #a78bfa; }
-#number {
-  font-size: 42px;
-  margin: 30px 0;
-  letter-spacing: 8px;
+h1 {
+  font-size: clamp(36px, 8vw, 60px);
+  line-height: 1.08;
+  margin: 18px 0;
+  letter-spacing: -2px;
 }
-button, input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 14px;
-  margin-top: 12px;
-  border-radius: 10px;
+h1 span {
+  color: var(--purple);
+}
+.hero p {
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.section-title {
+  font-size: 20px;
+  margin: 24px 0 14px;
+}
+.games {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.game {
+  background: linear-gradient(145deg, #191a2d, #10111c);
+  border: 1px solid #2b2b43;
+  padding: 20px;
+  border-radius: 18px;
+}
+.game-icon {
+  font-size: 29px;
+  margin-bottom: 15px;
+}
+.game h3 {
+  margin: 0 0 9px;
   font-size: 17px;
 }
+.game p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  min-height: 40px;
+}
 button {
-  background: #8b5cf6;
+  cursor: pointer;
+  border: 0;
+  border-radius: 11px;
+  background: var(--purple);
+  color: #100b20;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 13px 16px;
+  width: 100%;
+  margin-top: 10px;
+}
+button:active { transform: scale(.98); }
+button.secondary {
+  background: #25243b;
   color: white;
-  border: none;
+}
+.memory {
+  margin: 24px 0 35px;
+  background: var(--panel);
+  border: 1px solid #303047;
+  border-radius: 20px;
+  padding: 23px;
+}
+.memory h2 { margin-top: 0; }
+#number {
+  font-size: 42px;
+  letter-spacing: 9px;
+  text-align: center;
+  margin: 25px 0;
+  color: var(--purple);
 }
 input {
-  background: #080b12;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #393951;
+  border-radius: 10px;
+  background: #090a13;
   color: white;
-  border: 1px solid #475569;
+  font-size: 18px;
   text-align: center;
 }
-#message { color: #c4b5fd; }
+#message {
+  text-align: center;
+  color: #c4b5fd;
+  min-height: 20px;
+  font-size: 14px;
+}
+footer {
+  text-align: center;
+  color: #77778d;
+  border-top: 1px solid #242438;
+  padding: 24px 10px;
+  font-size: 12px;
+}
+@media (max-width: 420px) {
+  .games { grid-template-columns: 1fr; }
+  .game p { min-height: 0; }
+  .hero { padding-top: 40px; }
+}
 </style>
 </head>
 <body>
-<div class="card">
-  <h1>🧠 Brain Training</h1>
-  <p>Train your memory!</p>
-  <div id="number">Ready?</div>
-  <input id="answer" placeholder="Enter the number"
-         inputmode="numeric">
-  <button id="start" onclick="startGame()">Start Game</button>
-  <button id="check" onclick="checkAnswer()" hidden>
-    Check Answer
-  </button>
-  <p id="message">Remember the number!</p>
-</div>
+<header>
+  <div class="logo">🧠 Brain<span>Space</span></div>
+  <div class="tag">BETA · FREE</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">YOUR MIND. YOUR MISSION.</div>
+    <h1>Build a sharper<br><span>mind.</span></h1>
+    <p>Challenge yourself every day. Practice memory,
+    focus and logical thinking, one game at a time.</p>
+  </section>
+
+  <h2 class="section-title">Explore your mind</h2>
+  <section class="games">
+    <div class="game">
+      <div class="game-icon">🧩</div>
+      <h3>Memory Training</h3>
+      <p>Remember numbers and challenge your recall.</p>
+      <button onclick="document.getElementById('memory').scrollIntoView({behavior:'smooth'})">Play now ↗</button>
+    </div>
+    <div class="game">
+      <div class="game-icon">🎯</div>
+      <h3>Focus Training</h3>
+      <p>Coming soon. Practice attention with quick challenges.</p>
+      <button class="secondary" onclick="alert('Focus Training is coming soon!')">Coming soon</button>
+    </div>
+    <div class="game">
+      <div class="game-icon">🔷</div>
+      <h3>Logic Puzzles</h3>
+      <p>Coming soon. Explore patterns and solve problems.</p>
+      <button class="secondary" onclick="alert('Logic Puzzles are coming soon!')">Coming soon</button>
+    </div>
+    <div class="game">
+      <div class="game-icon">⚡</div>
+      <h3>Daily Challenge</h3>
+      <p>Build a habit of practising a little each day.</p>
+      <button onclick="document.getElementById('memory').scrollIntoView({behavior:'smooth'})">Try challenge ↗</button>
+    </div>
+  </section>
+
+  <section class="memory" id="memory">
+    <h2>🧠 Number Memory</h2>
+    <p style="color:#a6a6bc">Remember the number before it disappears.</p>
+    <div id="number">Ready?</div>
+    <input id="answer" type="text" inputmode="numeric"
+      placeholder="Enter the number" autocomplete="off">
+    <button id="start" onclick="startGame()">Start training</button>
+    <button id="check" onclick="checkAnswer()" hidden>Check answer</button>
+    <p id="message">Ready to challenge your memory?</p>
+  </section>
+</main>
+
+<footer>
+  BRAINSPACE · A PERSONAL BRAIN-TRAINING PROJECT<br><br>
+  Practice for fun. Results vary from person to person.
+</footer>
+
 <script>
 let target = "";
+let active = false;
+let timer;
 
 function startGame() {
+  clearTimeout(timer);
   target = String(Math.floor(100 + Math.random() * 900));
+  active = true;
   document.getElementById("number").textContent = target;
   document.getElementById("answer").value = "";
-  document.getElementById("message").textContent = "Remember it!";
+  document.getElementById("message").textContent = "Memorise the number!";
   document.getElementById("start").hidden = true;
+  document.getElementById("check").hidden = true;
 
-  setTimeout(() => {
+  timer = setTimeout(() => {
     document.getElementById("number").textContent = "???";
     document.getElementById("check").hidden = false;
-    document.getElementById("message").textContent =
-      "What was the number?";
+    document.getElementById("message").textContent = "What was the number?";
+    document.getElementById("answer").focus();
   }, 2500);
 }
 
 function checkAnswer() {
-  let answer = document.getElementById("answer").value.trim();
+  if (!active) return;
+  const answer = document.getElementById("answer").value.trim();
+  if (!answer) {
+    document.getElementById("message").textContent = "Enter your answer first.";
+    return;
+  }
+  active = false;
+  clearTimeout(timer);
   document.getElementById("number").textContent = target;
   document.getElementById("message").textContent =
-    answer === target ? "Correct! 🎉" : "Incorrect. Try again!";
+    answer === target ? "Correct! Great work 🎉" : "Not quite. Try again!";
   document.getElementById("check").hidden = true;
   document.getElementById("start").hidden = false;
-  document.getElementById("start").textContent = "Play Again";
+  document.getElementById("start").textContent = "Play again";
 }
 </script>
 </body>
 </html>
-
