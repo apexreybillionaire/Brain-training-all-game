@@ -1,1 +1,95 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brain Training Game</title>
+<style>
+body {
+  background: #080b12;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 30px 15px;
+}
+.card {
+  background: #151a27;
+  border: 1px solid #343b50;
+  border-radius: 20px;
+  padding: 25px 18px;
+  max-width: 380px;
+  margin: 40px auto;
+}
+h1 { color: #a78bfa; }
+#number {
+  font-size: 42px;
+  margin: 30px 0;
+  letter-spacing: 8px;
+}
+button, input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 10px;
+  font-size: 17px;
+}
+button {
+  background: #8b5cf6;
+  color: white;
+  border: none;
+}
+input {
+  background: #080b12;
+  color: white;
+  border: 1px solid #475569;
+  text-align: center;
+}
+#message { color: #c4b5fd; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🧠 Brain Training</h1>
+  <p>Train your memory!</p>
+  <div id="number">Ready?</div>
+  <input id="answer" placeholder="Enter the number"
+         inputmode="numeric">
+  <button id="start" onclick="startGame()">Start Game</button>
+  <button id="check" onclick="checkAnswer()" hidden>
+    Check Answer
+  </button>
+  <p id="message">Remember the number!</p>
+</div>
+<script>
+let target = "";
+
+function startGame() {
+  target = String(Math.floor(100 + Math.random() * 900));
+  document.getElementById("number").textContent = target;
+  document.getElementById("answer").value = "";
+  document.getElementById("message").textContent = "Remember it!";
+  document.getElementById("start").hidden = true;
+
+  setTimeout(() => {
+    document.getElementById("number").textContent = "???";
+    document.getElementById("check").hidden = false;
+    document.getElementById("message").textContent =
+      "What was the number?";
+  }, 2500);
+}
+
+function checkAnswer() {
+  let answer = document.getElementById("answer").value.trim();
+  document.getElementById("number").textContent = target;
+  document.getElementById("message").textContent =
+    answer === target ? "Correct! 🎉" : "Incorrect. Try again!";
+  document.getElementById("check").hidden = true;
+  document.getElementById("start").hidden = false;
+  document.getElementById("start").textContent = "Play Again";
+}
+</script>
+</body>
+</html>
+
